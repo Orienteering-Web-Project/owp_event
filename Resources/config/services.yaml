@@ -1,0 +1,17 @@
+services:
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        public: false       # Allows optimizing the container by removing unused services; this also means
+
+    Owp\OwpEvent\:
+        resource: '../../src/*'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Resources,OwpCoreBundle.php}'
+
+    Owp\OwpEvent\Controller\:
+        resource: '../../src/Controller'
+        tags: ['controller.service_arguments']
+
+    owp.service.event:
+        class: Owp\OwpEvent\Service\EventService
+        arguments: []

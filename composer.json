@@ -1,0 +1,23 @@
+{
+    "name": "owp/owp-event",
+    "description": "",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Quentin GUILLOU",
+            "email": "guillou.quentin.29@gmail.com"
+        }
+    ],
+    "require": {
+        "owp/owp-core": "*"
+    },
+    "config": {
+        "optimize-autoloader": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Owp\\OwpEvent\\": ""
+        }
+    }
+}
