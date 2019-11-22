@@ -1,6 +1,6 @@
 <?php
 
-namespace Owp\OwpEvent\Model\Event;
+namespace Owp\OwpEvent\Model;
 
 Trait EventEntryTrait
 {

@@ -12,6 +12,24 @@ services:
         resource: '../../src/Controller'
         tags: ['controller.service_arguments']
 
+    admin.event:
+        class: Owp\OwpEvent\Admin\EventAdmin
+        arguments: [~, Owp\OwpEvent\Entity\Event, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: content, label: "Evénements" }
+
+    admin.event_type:
+        class: Owp\OwpEvent\Admin\EventTypeAdmin
+        arguments: [~, Owp\OwpEvent\Entity\EventType, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: referentiel, label: "Type d'événements" }
+
+    admin.circuit:
+        class: App\Admin\CircuitAdmin
+        arguments: [~, App\Entity\Circuit, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm }
+
     owp.service.event:
         class: Owp\OwpEvent\Service\EventService
         arguments: []
