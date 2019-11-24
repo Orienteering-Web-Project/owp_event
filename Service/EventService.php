@@ -4,7 +4,7 @@ namespace Owp\OwpEvent\Service;
 
 use Owp\OwpCore\Entity\Event;
 use Symfony\Component\HttpFoundation\Request;
-use Owp\OwpEvent\EventRepository;
+use Owp\OwpEvent\Repository\EventRepository;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Security;
