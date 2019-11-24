@@ -2,46 +2,32 @@
 
 namespace Owp\OwpEvent\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Owp\OwpEvent\Repository\EventRepository;
 use App\Entity\People;
-use App\Entity\Event;
+use Owp\OwpEvent\Entity\Event;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\TeamType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use App\Service\EntryService;
+use Owp\OwpEvent\Service\EventService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
-class EventController extends AbstractController
+class EventController extends Controller
 {
-    /**
-     * @Route("/event", name="owp_event_list")
-     */
-    public function list(EventRepository $eventRepository): Response
+    public function list(EventService $eventService): Response
     {
-        $eventFilters = [];
-        $eventFilters[] = ['name' => 'dateBegin', 'value' => date('Y-m-d'), 'operator' => '>'];
-
-        if (!$this->isGranted('ROLE_MEMBER')) {
-            $eventFilters[] = ['name' => 'private', 'value' => false, 'operator' => '='];
-        }
-
         return $this->render('Event/list.html.twig', [
-            'events' => $eventRepository->findFiltered($eventFilters),
+            'events' => $eventService->getBy(),
         ]);
     }
 
-    /**
-     * @Route("/event/{slug}", name="owp_event_show", requirements={"page"="\d+"})
-     */
-    public function show(Request $request, Event $event, EntryService $entryService): Response
+    public function show(Request $request, Event $event, EventService $eventService, EntryService $entryService): Response
     {
-        if (!$this->isGranted('view', $event)) {
-            throw $this->createAccessDeniedException('Vous n\'êtes par autorisé à consulter cette page.');
-        }
+        $eventService->isAllowed('show', $news);
 
         return $this->render('Event/show.html.twig', [
             'form' => $this->isGranted('register', $event) ? $entryService->form($request, $event)->createView() : null,
@@ -49,18 +35,8 @@ class EventController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/api/event", name="owp_api_event")
-     */
-    public function api(EventRepository $eventRepository): JsonResponse
+    public function api(EventService $eventService): JsonResponse
     {
-        $results = [];
-        $events = $eventRepository->findAll();
-
-        foreach ($events as $event) {
-            $results[] = ['date' => $event->getDateBegin()->format('Y-m-d'), 'title' => $event->getTitle()];
-        }
-
-        return new JsonResponse($results);
+        return new JsonResponse($eventService->json());
     }
 }

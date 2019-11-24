@@ -30,18 +30,40 @@ class EventService {
     public function getBy(array $filters = [], $order = ['updateAt' => 'DESC'])
     {
         if (empty($filters)) {
-            $filters['promote'] = true;
+            $filters[] = [
+                'name' => 'promote',
+                'operator' => '=',
+                'value' => true
+            ];
         }
 
         if (!$this->security->isGranted('ROLE_MEMBER')) {
-            $filters['private'] = false;
+            $filters[] = [
+                'name' => 'private',
+                'operator' => '=',
+                'value' => false
+            ];
         }
 
-        return $this->eventRepository->findBy($filters, $order);
+        return $this->eventRepository->findFiltered($filters);
     }
 
-    public function view(Event $event)
+    public function isAllowed(Event $event)
     {
+        if (!$this->security->isGranted('view', $event)) {
+            throw $this->createAccessDeniedException('Vous n\'êtes par autorisé à consulter cette page.');
+        }
+    }
 
+    public function json()
+    {
+        $results = [];
+        $events = $this->getBy();
+
+        foreach ($events as $event) {
+            $results[] = ['date' => $event->getDateBegin()->format('Y-m-d'), 'title' => $event->getTitle()];
+        }
+
+        return $results;
     }
 }
