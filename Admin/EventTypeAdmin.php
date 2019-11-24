@@ -4,6 +4,7 @@
 
 namespace Owp\OwpEvent\Admin;
 
+use Owp\OwpCore\Admin\AbstractEntityAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;

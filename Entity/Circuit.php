@@ -3,7 +3,7 @@
 namespace Owp\OwpEvent\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Owp\OwpCore\Model as OwpCommonTrait;
+use Owp\OwpCore\Model as OwpCoreTrait;
 use Owp\OwpEvent\Model as OwpEventTrait;
 
 /**
@@ -12,9 +12,9 @@ use Owp\OwpEvent\Model as OwpEventTrait;
  */
 class Circuit
 {
-    use OwpCommonTrait\IdTrait;
-    use OwpCommonTrait\LabelTrait;
-    use OwpCommonTrait\AuthorTrait;
+    use OwpCoreTrait\IdTrait;
+    use OwpCoreTrait\LabelTrait;
+    use OwpCoreTrait\AuthorTrait;
 
     use OwpEventTrait\EventReferenceTrait;
 

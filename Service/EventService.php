@@ -37,7 +37,7 @@ class EventService {
             $filters['private'] = false;
         }
 
-        return $this->eventRepository->findBy($filters, $order)
+        return $this->eventRepository->findBy($filters, $order);
     }
 
     public function view(Event $event)

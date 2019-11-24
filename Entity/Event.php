@@ -6,7 +6,7 @@ use App\Entity\User;
 use Owp\OwpEvent\Entity\EventType;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-use Owp\OwpCore\Model as OwpCommonTrait;
+use Owp\OwpCore\Model as OwpCoreTrait;
 use Owp\OwpEvent\Model as OwpEventTrait;
 
 /**
@@ -15,11 +15,11 @@ use Owp\OwpEvent\Model as OwpEventTrait;
  */
 class Event
 {
-    use OwpCommonTrait\IdTrait;
-    use OwpCommonTrait\TitleTrait;
-    use OwpCommonTrait\ContentTrait;
-    use OwpCommonTrait\AuthorTrait;
-    use OwpCommonTrait\PrivateTrait;
+    use OwpCoreTrait\IdTrait;
+    use OwpCoreTrait\TitleTrait;
+    use OwpCoreTrait\ContentTrait;
+    use OwpCoreTrait\AuthorTrait;
+    use OwpCoreTrait\PrivateTrait;
 
     use OwpEventTrait\EventLocationTrait;
     use OwpEventTrait\EventEntryTrait;
@@ -56,7 +56,7 @@ class Event
     protected $circuits;
 
     /**
-     * @ORM\ManyToMany(targetEntity="News")
+     * @ORM\ManyToMany(targetEntity="Owp\OwpNews\Entity\News")
      * @ORM\JoinTable(name="event_news",
      *      joinColumns={@ORM\JoinColumn(name="event_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="news_id", referencedColumnName="id")}

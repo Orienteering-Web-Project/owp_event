@@ -4,7 +4,7 @@ namespace Owp\OwpEvent\Entity;
 
 use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
-use Owp\OwpCore\Model as OwpCommonTrait;
+use Owp\OwpCore\Model as OwpCoreTrait;
 
 /**
  * @ORM\Entity(repositoryClass="Owp\OwpEvent\Repository\EventTypeRepository")
@@ -12,7 +12,7 @@ use Owp\OwpCore\Model as OwpCommonTrait;
  */
 class EventType
 {
-    use OwpCommonTrait\IdTrait;
-    use OwpCommonTrait\LabelTrait;
-    use OwpCommonTrait\AuthorTrait;
+    use OwpCoreTrait\IdTrait;
+    use OwpCoreTrait\LabelTrait;
+    use OwpCoreTrait\AuthorTrait;
 }
