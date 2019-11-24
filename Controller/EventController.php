@@ -25,13 +25,13 @@ class EventController extends Controller
         ]);
     }
 
-    public function show(Request $request, Event $event, EventService $eventService, EntryService $entryService): Response
+    public function show(Request $request, string $slug, EventService $eventService, EntryService $entryService): Response
     {
-        $eventService->isAllowed('show', $news);
+        $entity = $eventService->get($slug);
 
         return $this->render('Event/show.html.twig', [
-            'form' => $this->isGranted('register', $event) ? $entryService->form($request, $event)->createView() : null,
-            'event' => $event
+            'form' => $this->isGranted('register', $entity) ? $entryService->form($request, $entity)->createView() : null,
+            'event' => $entity
         ]);
     }
 

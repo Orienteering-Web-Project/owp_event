@@ -26,7 +26,7 @@ services:
             - { name: sonata.admin, manager_type: orm, group: referentiel, label: "Type d'événements" }
 
     admin.circuit:
-        class: App\Admin\CircuitAdmin
-        arguments: [~, App\Entity\Circuit, ~]
+        class: Owp\OwpEvent\Admin\CircuitAdmin
+        arguments: [~, Owp\OwpEvent\Entity\Circuit, ~]
         tags:
             - { name: sonata.admin, manager_type: orm }

@@ -29,14 +29,6 @@ class EventService {
 
     public function getBy(array $filters = [], $order = ['updateAt' => 'DESC'])
     {
-        if (empty($filters)) {
-            $filters[] = [
-                'name' => 'promote',
-                'operator' => '=',
-                'value' => true
-            ];
-        }
-
         if (!$this->security->isGranted('ROLE_MEMBER')) {
             $filters[] = [
                 'name' => 'private',
@@ -48,11 +40,18 @@ class EventService {
         return $this->eventRepository->findFiltered($filters);
     }
 
-    public function isAllowed(Event $event)
+    public function get(string $slug)
     {
-        if (!$this->security->isGranted('view', $event)) {
-            throw $this->createAccessDeniedException('Vous n\'êtes par autorisé à consulter cette page.');
+        $entity = $this->eventRepository->findOneBySlug($slug);
+
+        if (empty($entity)) {
+            throw new NotFoundHttpException();
         }
+        elseif (!$this->security->isGranted('view', $entity)) {
+            throw new AccessDeniedException();
+        }
+
+        return $entity;
     }
 
     public function json()
