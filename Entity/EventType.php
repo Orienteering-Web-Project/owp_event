@@ -2,7 +2,7 @@
 
 namespace Owp\OwpEvent\Entity;
 
-use App\Entity\User;
+use Owp\OwpCore\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Owp\OwpCore\Model as OwpCoreTrait;
 

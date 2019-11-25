@@ -1,0 +1,18 @@
+<img class="first-slide opacity-20" src="{{ asset('images/default.jpg') | imagine_filter('carousel_header') }}" alt="First slide">
+<div class="container">
+    <div class="carousel-caption text-left content-header col-12 col-lg-10 offset-lg-1">
+        <h1 class="display-2 d-inline-block"><span class="badge badge-primary">{{ event.dateBegin|date('d') }}</span></h1>
+        <h3 class="display-4 d-inline-block"><span class="badge">{{ event.dateBegin|date('F')|trans|upper }}</span></h3>
+        <h3 class="display-4 d-inline-block"><span class="badge text-primary">{{ event.dateBegin|date('Y') }}</span></h3>
+        <h1>{{ event.title }}</h1>
+        <div class="text-white font-italic d-none d-lg-block">
+            Publié le {{ period(event.createAt) }}
+            <br/>Modifié le {{ period(event.updateAt) }}
+        </div>
+        {% if event.website %}
+            <div class="my-4">
+                <a href="{{ event.website }}" class="btn btn-primary">Accéder au site de l'évènement</a>
+            </div>
+        {% endif %}
+    </div>
+</div>

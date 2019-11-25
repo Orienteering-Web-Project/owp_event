@@ -2,8 +2,8 @@
 
 namespace Owp\OwpEvent\Model;
 
-use App\Entity\Team;
-use App\Entity\People;
+use Owp\OwpEntry\Entity\Team;
+use Owp\OwpEntry\Entity\People;
 
 Trait EventEntryTrait
 {
@@ -23,12 +23,12 @@ Trait EventEntryTrait
     protected $numberPeopleByEntries;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Team", cascade={"persist", "remove"}, mappedBy="event")
+     * @ORM\OneToMany(targetEntity="Owp\OwpEntry\Entity\Team", cascade={"persist", "remove"}, mappedBy="event")
      */
     protected $teams;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\People", cascade={"persist", "remove"}, mappedBy="event")
+     * @ORM\OneToMany(targetEntity="Owp\OwpEntry\Entity\People", cascade={"persist", "remove"}, mappedBy="event")
      */
     protected $peoples;
 

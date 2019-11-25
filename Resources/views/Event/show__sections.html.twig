@@ -1,0 +1,8 @@
+{% for section in event.sections %}
+    {% if is_granted('view', event) %}
+        <div class="col-12 col-lg-10 offset-lg-1">
+            <h2>{{ section.title }}</h2>
+            {{ section.content|raw }}
+        </div>
+    {% endif %}
+{% endfor %}

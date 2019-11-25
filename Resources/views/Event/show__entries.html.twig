@@ -1,0 +1,35 @@
+<h2>Inscriptions</h2>
+{% if not event.allowEntries %}
+    Les inscriptions sont désactivées pour cet évènement.
+{% else %}
+    {% if form is not empty %}
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                S'inscrire
+            </button>
+            <div class="dropdown-menu">
+                {% if is_granted('ROLE_USER') and event.numberPeopleByEntries is same as(1) %}
+                    <a class="dropdown-item" href="{{ path('owp_entry_quick', {'id': event.id}) }}">Inscription rapide</a>
+                {% endif %}
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal-entries-form">Inscription classique</a>
+            </div>
+        </div>
+        {% include '@OwpEvent/Event/show__entries_form.html.twig' %}
+        {% include '@OwpEvent/Event/show__entries_help.html.twig' %}
+    {% else %}
+        <p>
+            Les inscriptions à cet évènement sont terminées. Veuillez contacter l'organisateur de la course pour modifier ou supprimer votre inscription.
+        </p>
+    {% endif %}
+
+    <div class="btn-group">
+        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Export
+        </button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="{{ path('owp_entry_export', {'id': event.id, 'format': 'pdf'})}}">Export au format PDF</a>
+        </div>
+    </div>
+
+    {% include '@OwpEvent/Event/show__entries_list.html.twig' %}
+{% endif %}

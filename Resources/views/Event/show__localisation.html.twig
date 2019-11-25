@@ -1,0 +1,8 @@
+<h2>Emplacement</h2>
+<b>{{ event.locationTitle | capitalize }}</b>
+{{ event.locationInformation | raw }}
+{% if event.latitude is not empty and event.longitude is not empty %}
+    <div class="mt-4">
+        <div id="map" data-lat="{{ event.latitude }}" data-lon="{{ event.longitude }}"></div>
+    </div>
+{% endif %}

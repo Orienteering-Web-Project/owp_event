@@ -1,0 +1,7 @@
+<h2>Informations générales</h2>
+<table>
+    <tr><td class="font-weight-bold pr-4">Date</td><td>{{ period(event.dateBegin, event.dateEnd)|capitalize }}</td></tr>
+    <tr><td class="font-weight-bold pr-4">Type</td><td>{{ event.eventType.label|capitalize }}</td></tr>
+    {% if event.organizer %}<tr><td class="font-weight-bold pr-4">Organisateur</td><td>{{ event.organizer|capitalize }}</td></tr>{% endif %}
+    {% if event.website %}<tr><td class="font-weight-bold pr-4">Site Web</td><td><a href="{{ event.website }}">{{ event.website }}</a></td></tr>{% endif %}
+</table>

@@ -2,7 +2,7 @@
 
 namespace Owp\OwpEvent\Entity;
 
-use App\Entity\User;
+use Owp\OwpCore\Entity\User;
 use Owp\OwpEvent\Entity\EventType;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -72,7 +72,7 @@ class Event
         $this->numberPeopleByEntries = 1;
     }
 
-    public function getOrganizer(): ?string
+    public function getOrganizer(): string
     {
         return $this->organizer;
     }
@@ -84,7 +84,7 @@ class Event
         return $this;
     }
 
-    public function getWebsite(): ?string
+    public function getWebsite(): string
     {
         return $this->website;
     }
@@ -120,7 +120,7 @@ class Event
         return $this;
     }
 
-    public function getDateEnd(): ?\DateTimeInterface
+    public function getDateEnd(): \DateTimeInterface
     {
         return $this->dateEnd;
     }
@@ -132,7 +132,7 @@ class Event
         return $this;
     }
 
-    public function getEventType(): ?EventType
+    public function getEventType(): EventType
     {
         return $this->eventType;
     }

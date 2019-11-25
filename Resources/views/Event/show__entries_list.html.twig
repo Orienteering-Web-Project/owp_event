@@ -1,0 +1,25 @@
+{% if event.teams|length > 0 or event.peoples|length > 0 %}
+    <table id="event-entries" class="table">
+        <thead class="bg-primary text-white">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Prénom</th>
+                <th scope="col">Nom</th>
+                {% if event.circuits|length > 0 %}<th scope="col">Circuit</th>{% endif %}
+                <th scope="col" class="d-none d-lg-block">Commentaire</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if event.teams|length > 0 %}
+                {% include '@OwpEvent/Event/show__entries_list__teams.html.twig' %}
+            {% else %}
+                {% include '@OwpEvent/Event/show__entries_list__individuals.html.twig' %}
+            {% endif %}
+        </tbody>
+    </table>
+{% else %}
+    <div>
+        Aucun inscrit à cet événement
+    </div>
+{% endif %}

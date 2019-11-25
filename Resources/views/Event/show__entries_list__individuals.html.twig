@@ -1,0 +1,36 @@
+{% for people in event.peoples %}
+    <tr>
+        <th scope="row">{{ loop.index }}</th>
+        <td>
+            {% if people.base %}
+                <div>{{ people.base.firstName }}</div>
+            {% else %}
+                <div>{{ people.firstName ? people.firstName : '-' }}</div>
+            {% endif %}
+        </td>
+        <td>
+            {% if people.base %}
+                <div>{{ people.base.lastName }}</div>
+            {% else %}
+                <div>{{ people.lastName ? people.lastName : '-' }}</div>
+            {% endif %}
+        </td>
+        <td class="d-none d-lg-block">
+            <div class="text-center">{{ people.comment ? people.comment : '-' }}</div>
+        </td>
+        <td>
+            <div class="btn-group">
+                {% if is_granted('update', people) %}
+                <a href="{{ path('owp_people_update', {'id': people.id}) }}" class="btn btn-outline-secondary">
+                    <i class="fa fa-edit" aria-hidden="true"></i>
+                </a>
+                {% endif %}
+                {% if is_granted('delete', people) %}
+                <a href="#" data-toggle="modal" data-target="#confirm-delete" data-href="{{ path('owp_people_delete', {'id': people.id}) }}" class="btn btn-outline-danger">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </a>
+                {% endif %}
+            </div>
+        </td>
+    </tr>
+{% endfor %}

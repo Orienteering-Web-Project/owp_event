@@ -1,0 +1,42 @@
+{% for team in event.teams %}
+    <tr>
+        <th scope="row">{{ loop.index }}</th>
+        <td>
+            {% for people in team.peoples %}
+                {% if people.base %}
+                <div>{{ people.base.firstName }}</div>
+                {% else %}
+                <div>{{ people.firstName ? people.firstName : '-' }}</div>
+                {% endif %}
+            {% endfor %}
+        </td>
+        <td>
+            {% for people in team.peoples %}
+                {% if people.base %}
+                <div>{{ people.base.lastName }}</div>
+                {% else %}
+                <div>{{ people.lastName ? people.lastName : '-' }}</div>
+                {% endif %}
+            {% endfor %}
+        </td>
+        <td class="d-none d-lg-block">
+            {% for people in team.peoples %}
+                <div class="text-center">{{ people.comment ? people.comment : '-' }}</div>
+            {% endfor %}
+        </td>
+        <td>
+            <div class="btn-group">
+                {% if is_granted('update', team) %}
+                <a href="{{ path('owp_team_update', {'id': team.id}) }}" class="btn btn-outline-secondary">
+                    <i class="fa fa-edit" aria-hidden="true"></i>
+                </a>
+                {% endif %}
+                {% if is_granted('delete', team) %}
+                <a href="#" data-toggle="modal" data-target="#confirm-delete" data-href="{{ path('owp_team_delete', {'id': team.id}) }}" class="btn btn-outline-danger">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </a>
+                {% endif %}
+            </div>
+        </td>
+    </tr>
+{% endfor %}
