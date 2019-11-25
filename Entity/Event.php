@@ -8,7 +8,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Owp\OwpCore\Model as OwpCoreTrait;
 use Owp\OwpEvent\Model as OwpEventTrait;
-use Knp\DoctrineBehaviors\Model\Sluggable\Sluggable;
 
 /**
  * @ORM\Entity(repositoryClass="Owp\OwpEvent\Repository\EventRepository")
@@ -16,8 +15,6 @@ use Knp\DoctrineBehaviors\Model\Sluggable\Sluggable;
  */
 class Event
 {
-    use Sluggable;
-
     use OwpCoreTrait\IdTrait;
     use OwpCoreTrait\TitleTrait;
     use OwpCoreTrait\ContentTrait;
@@ -26,11 +23,6 @@ class Event
 
     use OwpEventTrait\EventLocationTrait;
     use OwpEventTrait\EventEntryTrait;
-
-    /**
-     * @ORM\Column(type="string", length=512)
-     */
-    protected $slug;
 
     /**
      * @ORM\Column(type="datetime")
@@ -186,18 +178,9 @@ class Event
 
     public function addSections($sections)
     {
-        $this->circuits->add($circuit);
+        $this->sections->add($sections);
 
         return $this;
     }
 
-    public function getSluggableFields()
-    {
-        return [ 'id', 'title' ];
-    }
-
-    public function generateSlugValue($values)
-    {
-        return implode('-', str_replace(' ', '-', $values));
-    }
 }
