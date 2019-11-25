@@ -1,0 +1,59 @@
+{% extends '@OwpCore/content.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('event') }}
+    {{ encore_entry_link_tags('map') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('event') }}
+    {{ encore_entry_script_tags('map') }}
+{% endblock %}
+
+{% block title %}{{ event.title }}{% endblock %}
+
+{% block content_header %}
+    {% include '@OwpEvent/Page/show__header.html.twig' %}
+{% endblock %}
+
+{% block content_admin_actions %}
+    {% include '@OwpEvent/Utils/admin_action.html.twig' %}
+{% endblock %}
+
+{% block content_body %}
+    <div class="row my-4 mx-0 mx-lg-4">
+        <div class="col-12  col-lg-10 offset-lg-1">
+            {{ _self.breadcrumb([{'label':'Liste des événements', 'class': '', 'url':'owp_event_list'}, {'label': event.title, 'class': 'active'}])}}
+        </div>
+
+        {% if event.content %}
+            <div class="col-12 col-lg-10 offset-lg-1">{{ event.content|raw }}</div>
+        {% endif %}
+
+        <div class="col-12 col-lg-5 offset-lg-1">
+            <div class="mb-4">
+                {% include '@OwpEvent/Page/show__main_informations.html.twig' %}
+            </div>
+            {% if event.locationTitle or event.locationInformation or (event.latitude and event.longitude) %}
+                <div class="mb-4">
+                    {% include '@OwpEvent/Page/show__localisation.html.twig' %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="col-12 col-lg-5 mb-4 overflow-auto">
+            {% if event.circuits|length > 0 %}
+                {% include '@OwpEvent/Page/show__circuits.html.twig' %}
+            {% endif %}
+            {% include '@OwpEvent/Page/show__entries.html.twig' %}
+        </div>
+
+        {% include '@OwpEvent/Page/show__sections.html.twig' %}
+
+        {% include '@OwpCore/Comment/comment.html.twig' with {id: 'event:' ~ event.id} %}
+    </div>
+
+    {% include '@OwpCore/Common/Modal/modal__confirm_delete.html.twig' %}
+{% endblock %}
