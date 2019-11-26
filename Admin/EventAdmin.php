@@ -63,8 +63,14 @@ final class EventAdmin extends AbstractNodeAdmin
             ->with('Emplacement', ['class' => 'text-bold col-12 col-lg-9'])
                 ->add('locationTitle', TextType::class, ['required' => false])
                 ->add('locationInformation', CKEditorType::class, ['config_name' => 'default', 'required' => false])
-                ->add('latitude', NumberType::class, ['required' => false])
-                ->add('longitude', NumberType::class, ['required' => false])
+                ->add('latitude', NumberType::class, [
+                    'required' => false,
+                    'scale' => 6
+                ])
+                ->add('longitude', NumberType::class, [
+                    'required' => false,
+                    'scale' => 6
+                ])
             ->end()
         ;
 

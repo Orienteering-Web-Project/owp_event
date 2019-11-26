@@ -72,7 +72,7 @@ class Event
         $this->numberPeopleByEntries = 1;
     }
 
-    public function getOrganizer(): string
+    public function getOrganizer()
     {
         return $this->organizer;
     }
@@ -84,7 +84,7 @@ class Event
         return $this;
     }
 
-    public function getWebsite(): string
+    public function getWebsite()
     {
         return $this->website;
     }
@@ -108,7 +108,7 @@ class Event
         return $this;
     }
 
-    public function getDateBegin(): ?\DateTimeInterface
+    public function getDateBegin()
     {
         return $this->dateBegin;
     }
@@ -120,7 +120,7 @@ class Event
         return $this;
     }
 
-    public function getDateEnd(): \DateTimeInterface
+    public function getDateEnd()
     {
         return $this->dateEnd;
     }
