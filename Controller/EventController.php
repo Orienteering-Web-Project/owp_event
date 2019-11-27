@@ -29,7 +29,6 @@ class EventController extends Controller
         $event = $eventService->get($slug);
 
         return $this->render('@OwpEvent/Page/show.html.twig', [
-            'form' => $this->has('service.entry') ? $this->get('service.entry')->getForm($request, $event) : null,
             'event' => $event
         ]);
     }

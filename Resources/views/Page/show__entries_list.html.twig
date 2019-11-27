@@ -12,9 +12,9 @@
         </thead>
         <tbody>
             {% if event.teams|length > 0 %}
-                {% include '@OwpEvent/Event/show__entries_list__teams.html.twig' %}
+                {% include '@OwpEvent/Page/show__entries_list__teams.html.twig' %}
             {% else %}
-                {% include '@OwpEvent/Event/show__entries_list__individuals.html.twig' %}
+                {% include '@OwpEvent/Page/show__entries_list__individuals.html.twig' %}
             {% endif %}
         </tbody>
     </table>

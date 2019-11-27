@@ -25,7 +25,7 @@
 {% block content_body %}
     <div class="row my-4 mx-0 mx-lg-4">
         <div class="col-12  col-lg-10 offset-lg-1">
-            {{ _self.breadcrumb([{'label':'Liste des événements', 'class': '', 'url':'owp_event_list'}, {'label': event.title, 'class': 'active'}])}}
+            {{ _self.breadcrumb([{'label':'Liste des événements', 'class': '', 'url':path('owp_event_list')}, {'label': event.title, 'class': 'active'}])}}
         </div>
 
         {% if event.content %}
@@ -47,7 +47,9 @@
             {% if event.circuits|length > 0 %}
                 {% include '@OwpEvent/Page/show__circuits.html.twig' %}
             {% endif %}
-            {% include '@OwpEvent/Page/show__entries.html.twig' %}
+            {% if entry %}
+                {% include '@OwpEvent/Page/show__entries.html.twig' %}
+            {% endif %}
         </div>
 
         {% include '@OwpEvent/Page/show__sections.html.twig' %}

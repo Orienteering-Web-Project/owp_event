@@ -12,6 +12,9 @@ class EventVoter extends Voter
 {
     const VIEW = 'view';
     const REGISTER = 'register';
+    const REGISTER_OPEN = 'register_open';
+    const REGISTER_TEAM = 'register_team';
+    const REGISTER_CLUB = 'register_club';
 
     private $security;
 
@@ -22,7 +25,7 @@ class EventVoter extends Voter
 
     protected function supports($attribute, $subject)
     {
-        if (!in_array($attribute, [self::REGISTER, self::VIEW])) {
+        if (!in_array($attribute, [self::REGISTER, self::VIEW, self::REGISTER_OPEN, self::REGISTER_TEAM, self::REGISTER_CLUB])) {
             return false;
         }
 
@@ -40,6 +43,11 @@ class EventVoter extends Voter
         switch ($attribute) {
             case self::REGISTER:
                 return $this->canRegister($event, $user);
+            case self::REGISTER_OPEN:
+            case self::REGISTER_CLUB:
+                return $this->canRegisterIndividual($event, $user);
+            case self::REGISTER_TEAM:
+                return $this->canRegisterTeam($event, $user);
             case self::VIEW:
                 return $this->canView($event, $user);
         }
@@ -58,6 +66,16 @@ class EventVoter extends Voter
         }
 
         return false;
+    }
+
+    private function canRegisterIndividual(Event $event, $user)
+    {
+        return $this->canRegister($event, $user) && $event->getNumberPeopleByEntries() === 1;
+    }
+
+    private function canRegisterTeam(Event $event, $user)
+    {
+        return $this->canRegister($event, $user) && $event->getNumberPeopleByEntries() > 1;
     }
 
     private function canView(Event $event, $user)
