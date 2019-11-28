@@ -11,7 +11,9 @@
                 <div class="dropdown-menu">
                     {% if is_granted('ROLE_USER') and event.numberPeopleByEntries is same as(1) %}
                         <a class="dropdown-item" href="{{ path('owp_entry_quick', {'slug': event.slug}) }}">Inscription rapide</a>
-                        <a class="dropdown-item" href="{{ path('owp_entry_add_form', {'slug': event.slug, 'mode': 'club'}) }}">Inscription par club</a>
+                    {% endif %}
+                    {% if event.numberPeopleByEntries is same as(1) %}
+                        <a class="dropdown-item" href="{{ path('owp_entry_add_form', {'slug': event.slug, 'mode': 'club'}) }}">Inscription licencié</a>
                         <a class="dropdown-item" href="{{ path('owp_entry_add_form', {'slug': event.slug, 'mode': 'open'}) }}">Inscription non licencié</a>
                     {% else %}
                         <a class="dropdown-item" href="{{ path('owp_entry_add_form', {'slug': event.slug, 'mode': 'team'}) }}">Inscription d'une équipe</a>
