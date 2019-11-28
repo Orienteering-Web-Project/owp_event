@@ -5,15 +5,8 @@ namespace Owp\OwpEvent\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use Owp\OwpEvent\Repository\EventRepository;
-use Owp\OwpEntry\Entity\People;
-use Owp\OwpEvent\Entity\Event;
 use Symfony\Component\HttpFoundation\Request;
-use Owp\OwpEntry\Form\TeamType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Owp\OwpEvent\Service\EventService;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class EventController extends Controller
 {
