@@ -11,4 +11,12 @@
         </ul>
         <a href="{{ path('owp_event_show', {'slug': event.slug}) }}" class="btn btn-primary stretched-link">Plus d'information</a>
     </div>
+    {% if is_granted('edit', event) %}
+        <div class="admin-quick-edit">
+            <a href="{{ path('admin_owp_owpevent_event_edit', {'id': event.id}) }}" class='btn btn-outline-secondary' href=""><i class="fa fa-edit"></i></a>
+            <button data-toggle="modal" data-target="#confirm-delete" data-href="{{ path('admin_owp_owpevent_event_delete', {'id': event.id}) }}" type="button" class="btn btn-outline-danger">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+            </button>
+        </div>
+    {% endif %}
 </div>

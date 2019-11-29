@@ -33,6 +33,7 @@
             </button>
             <div class="dropdown-menu">
                 <a class="dropdown-item" href="{{ path('owp_entry_export', {'slug': event.slug, 'format': 'pdf'})}}">Export au format PDF</a>
+                <a class="dropdown-item" href="{{ path('owp_entry_export', {'slug': event.slug, 'format': 'oe2010'})}}">Export au format CSV pour OE2010</a>
             </div>
         </div>
     </div>

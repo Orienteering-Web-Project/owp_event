@@ -10,6 +10,7 @@ use Symfony\Component\Security\Core\Security;
 
 class EventVoter extends Voter
 {
+    const EDIT = 'edit';
     const VIEW = 'view';
     const REGISTER = 'register';
     const REGISTER_OPEN = 'register_open';
@@ -25,7 +26,7 @@ class EventVoter extends Voter
 
     protected function supports($attribute, $subject)
     {
-        if (!in_array($attribute, [self::REGISTER, self::VIEW, self::REGISTER_OPEN, self::REGISTER_TEAM, self::REGISTER_CLUB])) {
+        if (!in_array($attribute, [self::REGISTER, self::VIEW, self::REGISTER_OPEN, self::REGISTER_TEAM, self::REGISTER_CLUB, self::EDIT])) {
             return false;
         }
 
@@ -50,6 +51,8 @@ class EventVoter extends Voter
                 return $this->canRegisterTeam($event, $user);
             case self::VIEW:
                 return $this->canView($event, $user);
+            case self::EDIT:
+                return $this->canEdit($event, $user);
         }
 
         throw new \LogicException('This code should not be reached!');
@@ -85,5 +88,14 @@ class EventVoter extends Voter
         }
 
         return true;
+    }
+
+    private function canEdit(Event $event, $user)
+    {
+        if ($this->security->isGranted('ROLE_WEBMASTER')) {
+            return true;
+        }
+
+        return false;
     }
 }
