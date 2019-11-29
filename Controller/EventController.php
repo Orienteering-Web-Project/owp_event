@@ -22,7 +22,7 @@ class EventController extends Controller
         $event = $eventService->get($slug);
 
         return $this->render('@OwpEvent/Page/show.html.twig', [
-            'entry' => $this->has('service.entry'),
+            'entry' => $this->has('service.people'),
             'event' => $event
         ]);
     }
