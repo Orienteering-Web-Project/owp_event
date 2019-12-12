@@ -7,13 +7,32 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Owp\OwpEvent\Service\EventService;
+use Owp\OwpEvent\Form\FilteringEventType;
 
 class EventController extends Controller
 {
-    public function list(EventService $eventService): Response
+    public function list(Request $request, EventService $eventService): Response
     {
+        $form = $this->createForm(FilteringEventType::class, []);
+        $form->handleRequest($request);
+
+        $filters = [];
+        if ($form->isSubmitted() && $form->isValid()) {
+            $datas = $form->getData();
+            foreach ($datas as $key => $value) {
+                if (!empty($value)) {
+                    $filters[] = [
+                        'name' => $key,
+                        'operator' => '=',
+                        'value' => $value
+                    ];
+                }
+            }
+        }
+
         return $this->render('@OwpEvent/List/list.html.twig', [
-            'events' => $eventService->getBy(),
+            'form' => $form->createView(),
+            'events' => $eventService->getBy($filters),
         ]);
     }
 
