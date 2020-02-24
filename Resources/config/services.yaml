@@ -30,3 +30,8 @@ services:
         arguments: [~, Owp\OwpEvent\Entity\Circuit, ~]
         tags:
             - { name: sonata.admin, manager_type: orm }
+
+    owp_event.upcomming_events_list:
+        class: Owp\OwpEvent\Block\UpcommingEventListBlock
+        tags:
+            - { name: sonata.block }
