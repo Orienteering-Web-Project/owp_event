@@ -132,7 +132,7 @@ class Event
         return $this;
     }
 
-    public function getEventType(): EventType
+    public function getEventType(): ?EventType
     {
         return $this->eventType;
     }
