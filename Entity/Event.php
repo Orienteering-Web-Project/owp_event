@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Owp\OwpCore\Model as OwpCoreTrait;
 use Owp\OwpEvent\Model as OwpEventTrait;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Vich\UploaderBundle\Entity\File as EmbeddedFile;
 
 /**
  * @ORM\Entity(repositoryClass="Owp\OwpEvent\Repository\EventRepository")
@@ -77,6 +78,7 @@ class Event
         $this->circuits = new ArrayCollection();
         $this->sections = new ArrayCollection();
         $this->numberPeopleByEntries = 1;
+        $this->image = new EmbeddedFile();
     }
 
     public function getOrganizer()
