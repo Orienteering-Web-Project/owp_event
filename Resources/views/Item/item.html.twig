@@ -1,5 +1,5 @@
 <div class="card bg-dark border-primary h-100">
-    <img src="{{ asset('images/default.jpg') | imagine_filter('thumbnail') }}" class="card-img-top position-absolute opacity-20 h-100" alt="...">
+    <img src="{{ asset(event.image.name is not null ? 'images/' ~ event.image.name : 'images/default.jpg') | imagine_filter('thumbnail') }}" class="card-img-top position-absolute opacity-20 h-100" alt="...">
     <div class="card-body text-white z-index-10">
         <h1 class="d-inline-flex"><span class="badge badge-primary">{{ event.dateBegin|date('d') }}</span></h1>
         <h3 class="d-inline-flex">{{ event.dateBegin|date('F')|trans }}</h3>

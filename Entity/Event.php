@@ -8,10 +8,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Owp\OwpCore\Model as OwpCoreTrait;
 use Owp\OwpEvent\Model as OwpEventTrait;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="Owp\OwpEvent\Repository\EventRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @Vich\Uploadable
  */
 class Event
 {
@@ -20,6 +22,7 @@ class Event
     use OwpCoreTrait\ContentTrait;
     use OwpCoreTrait\AuthorTrait;
     use OwpCoreTrait\PrivateTrait;
+    use OwpCoreTrait\ImageTrait;
 
     use OwpEventTrait\EventLocationTrait;
     use OwpEventTrait\EventEntryTrait;
@@ -64,6 +67,10 @@ class Event
      */
     protected $sections;
 
+    /**
+     * @ORM\OneToMany(targetEntity="EventFile", cascade={"persist", "remove"}, mappedBy="event")
+     */
+    protected $files;
 
     public function __construct()
     {
@@ -183,4 +190,22 @@ class Event
         return $this;
     }
 
+    public function getFiles()
+    {
+        return $this->files;
+    }
+
+    public function setFiles($files): self
+    {
+        $this->files = $files;
+
+        return $this;
+    }
+
+    public function addFile($file)
+    {
+        $this->files->add($file);
+
+        return $this;
+    }
 }

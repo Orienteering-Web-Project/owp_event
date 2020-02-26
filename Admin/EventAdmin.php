@@ -16,6 +16,7 @@ use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Owp\OwpEvent\Entity\EventType;
 use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 final class EventAdmin extends AbstractNodeAdmin
 {
@@ -53,6 +54,13 @@ final class EventAdmin extends AbstractNodeAdmin
                 ->add('private', CheckboxType::class, [
                     'required' => false,
                     'label' => 'Rendre cette événement privé, visible uniquement par les licenciés du club'
+                ])
+                ->add('imageFile', VichImageType::class, [
+                    'required' => false,
+                    'allow_delete' => true,
+                    'download_uri' => true,
+                    'image_uri' => true,
+                    'asset_helper' => true,
                 ])
             ->end()
         ;
@@ -98,6 +106,12 @@ final class EventAdmin extends AbstractNodeAdmin
                 'multiple' => true,
                 'class' => 'Owp\OwpNews\Entity\News',
             ])
+            ->end()
+        ;
+
+        $formMapper
+            ->with('Fichiers', ['class' => 'text-bold col-12 col-lg-9'])
+            ->add('files')
             ->end()
         ;
     }
